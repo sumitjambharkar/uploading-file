@@ -1,8 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const User = require('./modle/User');
+const User = require('./models/User');
 const cors = require('cors');
 const multer  = require('multer')
+
 const upload = multer({ dest: 'static/' });
 
 const app = express()
@@ -17,8 +18,6 @@ app.set('view engine','ejs');
 app.set('views','./views');
 
 app.use(cors())
-
-
 
 app.use('/static',express.static('./static'));
 
@@ -36,9 +35,9 @@ app.post('/upload', upload.single('profile'),async(req, res)=>{
   let newFile ;
     const {file} = req;
   newFile = await User.create({
-    fieldname : file.fieldname,
-    originalname:file.originalname ,
-    mimetype : file.mimetype ,
+    fieldName : file.fieldName,
+    originalName:file.originalName ,
+    mimeType : file.mimeType ,
     path : file.path ,
     size : file.size,
     
